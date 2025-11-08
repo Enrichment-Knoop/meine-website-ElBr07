@@ -1,40 +1,49 @@
 <!DOCTYPE html>
 <html lang="de">
-  <head>
+<head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meine erste Website</title>
+    <title>Ich bin Elias Braun</title>
     <link rel="stylesheet" href="style.css">
-  </head>
-  <body>
-    <header>
-      <h1>Willkommen auf meiner Website</h1>
-      <nav>
-        <a href="#">Start</a>
-        <a href="#">Über mich</a>
-        <a href="#">Kontakt</a>
-      </nav>
-    </header>
+</head>
+<body>
+    <!-- Navigationsleiste -->
+    <nav class="navbar">
+        <a href="index.html" class="nav-item">Start</a>
+        <a href="ueber-mich.html" class="nav-item">Über mich</a>
+        <a href="projekte.html" class="nav-item">Projekte</a>
+        <a href="impressum.html" class="nav-item">Impressum</a>
+        <!-- Shop‑Icon wird per JS ein‑/ausgeblendet -->
+        <a href="#" id="shop-link" class="nav-item">Shop</a>
+    </nav>
 
-    <main>
-      <section>
-        <h2>Mein erstes Projekt</h2>
-        <p>Hier entsteht etwas Spannendes – mit HTML, CSS und JavaScript.</p>
-        <button id="colorButton">Farbe ändern</button>
-      </section>
+    <!-- Hauptbereich -->
+    <main class="container">
+        <section id="mode-choice">
+            <h1>Willkommen, Elias!</h1>
+            <p>Möchtest du die Seite spielerisch erleben?</p>
+            <button class="btn" id="yes-btn">Ja, lass uns spielen!</button>
+            <button class="btn" id="no-btn">Nein, ich will alles sofort sehen.</button>
+        </section>
+
+        <!-- Wird nach Auswahl sichtbar -->
+        <section id="info" class="hidden">
+            <h2>Punkte: <span id="points">0</span></h2>
+            <p>Entdecke neue Kacheln im Shop!</p>
+        </section>
     </main>
 
-    <footer>
-      <p>© 2025 – erstellt im Enrichment-Kurs „Mit KI zur eigenen Website“</p>
-      <p>
-	  <!-- ===========================================================
-			Impressum - Bitte nicht verändern! (rechtlich verbindlich)
-		=========================================================== -->
-        <a href="impressum.html" target="_blank" rel="noopener noreferrer">Impressum</a>
-		<a href="impressum_eltern.html" target="_blank" rel="noopener noreferrer">Impressum verantwortliche Eltern</a>
-      </p>
+    <!-- Footer ---------------------------------------------------------- -->
+    <footer class="site-footer">
+        <p>© 2025 – erstellt im Enrichment‑Kurs „Mit KI zur eigenen Website“</p>
+        <p>
+            <!-- ===========================================================
+                 Impressum - Bitte nicht verändern! (rechtlich verbindlich)
+            =========================================================== -->
+            <a href="impressum.html" target="_blank" rel="noopener noreferrer">Impressum</a>
+            <a href="impressum_eltern.html" target="_blank" rel="noopener noreferrer">Impressum verantwortliche Eltern</a>
+        </p>
     </footer>
 
     <script src="script.js"></script>
-  </body>
+</body>
 </html>

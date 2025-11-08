@@ -2,7 +2,7 @@
    Grundvariablen – Farben, Blur‑Radius usw.
    -------------------------------------------------------------- */
 :root {
-    --bg-color:    #0a0a0a;   /* dunkler Hintergrund */
+    --bg-color:    #0A0535;   /* dunkler Hintergrund */
     --text-color: #e0e0e0;   /* helle Schrift */
     --accent-blue:#4169e1;   /* royal‑blau */
     --blur-radius:12px;      /* für Navbar & Footer */

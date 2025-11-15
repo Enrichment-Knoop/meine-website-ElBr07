@@ -1,49 +1,93 @@
 <!DOCTYPE html>
 <html lang="de">
+
 <head>
     <meta charset="UTF-8">
-    <title>Ich bin Elias Braun</title>
-    <link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home – Elias Braun</title>
+
+    <!-- Globales Stylesheet – Root‑relativ -->
+    <link rel="stylesheet" href="/style.css">
+
+    <!-- Optional: Font‑Awesome (nur einmal nötig, aber kein Schaden, wenn in jeder Seite) -->
+    <script src="https://kit.fontawesome.com/66aa7c98b3.js" crossorigin="anonymous"></script>
 </head>
+
 <body>
-    <!-- Navigationsleiste -->
+
+    <!-- ====================  GLASS‑NAVBAR  ==================== -->
     <nav class="navbar">
-        <a href="index.html" class="nav-item">Start</a>
-        <a href="ueber-mich.html" class="nav-item">Über mich</a>
-        <a href="projekte.html" class="nav-item">Projekte</a>
-        <a href="impressum.html" class="nav-item">Impressum</a>
-        <!-- Shop‑Icon wird per JS ein‑/ausgeblendet -->
-        <a href="#" id="shop-link" class="nav-item">Shop</a>
+        <div class="main-nav">
+
+            <div class="logo-placeholder" aria-label="Logo"></div>
+
+            <!-- Hamburger‑Button (nur mobil) -->
+            <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+
+            <!-- Navigation‑Links -->
+            <ul class="nav-links">
+                <!-- Home → immer zum Projekt‑Root -->
+                <li class="nav-item"><a href="/index.html" class="nav-link">HOME</a></li>
+
+                <!-- Die übrigen Links sind relativ zum Root, deshalb ebenfalls mit / beginnen -->
+                <li class="nav-item"><a href="/pages/about/" class="nav-link">ABOUT</a></li>
+                <li class="nav-item"><a href="/pages/skills/" class="nav-link">SKILLS</a></li>
+                <li class="nav-item"><a href="/pages/portfolio/" class="nav-link">PORTFOLIO</a></li>
+                <li class="nav-item"><a href="/pages/contact/" class="nav-link">CONTACT</a></li>
+            </ul>
+        </div>
     </nav>
 
-    <!-- Hauptbereich -->
-    <main class="container">
-        <section id="mode-choice">
-            <h1>Willkommen, Elias!</h1>
-            <p>Möchtest du die Seite spielerisch erleben?</p>
-            <button class="btn" id="yes-btn">Ja, lass uns spielen!</button>
-            <button class="btn" id="no-btn">Nein, ich will alles sofort sehen.</button>
+    <!-- ====================  MODUS‑WAHL (direkt unter Navbar) ==================== -->
+    <section id="mode-choice">
+        <h2>Willkommen! Möchtest du die Seite spielerisch erleben?</h2>
+        <button class="btn" id="yes-btn">Ja, lass uns spielen!</button>
+        <button class="btn" id="no-btn">Nein, ich will alles sofort sehen.</button>
+    </section>
+
+    <!-- ====================  HERO / HOME ==================== -->
+    <div class="Fp">
+        <section id="home1">
+            <div class="home">
+                <h2 style="color: rgb(27, 183, 204);">HI I'm</h2>
+                <h1 class="name"><span style="color:orangered;">E</span>lias Braun</h1>
+                <h3 style="color: aqua; font-size:28px;">
+                    Ich bin Web‑Learning‑Student,<br>
+                    <i class="fab fa-aws" style="font-size: larger; color: orange;"></i> Partner.
+                </h3>
+
+                <ul class="sci">
+                    <li><a href="https://www.facebook.com/deepak.sp.355" class="fac"><i class="fab fa-facebook"></i></a>
+                    </li>
+                    <li><a href="https://t.me/+919790870300" class="tw"><i class="fab fa-telegram"></i></a></li>
+                </ul>
+            </div>
         </section>
 
-        <!-- Wird nach Auswahl sichtbar -->
+        <!-- INFO‑SECTION (nach Modus‑Wahl) -->
         <section id="info" class="hidden">
             <h2>Punkte: <span id="points">0</span></h2>
             <p>Entdecke neue Kacheln im Shop!</p>
+            <a href="#" id="shop-link" class="btn-primary">Shop</a>
         </section>
-    </main>
+    </div>
 
-    <!-- Footer ---------------------------------------------------------- -->
+    <!-- ====================  FOOTER  ==================== -->
     <footer class="site-footer">
         <p>© 2025 – erstellt im Enrichment‑Kurs „Mit KI zur eigenen Website“</p>
         <p>
-            <!-- ===========================================================
-                 Impressum - Bitte nicht verändern! (rechtlich verbindlich)
-            =========================================================== -->
             <a href="impressum.html" target="_blank" rel="noopener noreferrer">Impressum</a>
-            <a href="impressum_eltern.html" target="_blank" rel="noopener noreferrer">Impressum verantwortliche Eltern</a>
+            <a href="impressum_eltern.html" target="_blank" rel="noopener noreferrer">Impressum verantwortliche
+                Eltern</a>
         </p>
     </footer>
 
-    <script src="script.js"></script>
+    <!-- Globales JavaScript -->
+    <script src="/script.js"></script>
 </body>
+
 </html>

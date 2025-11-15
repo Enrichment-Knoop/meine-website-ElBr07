@@ -1,0 +1,777 @@
+Aktion bei unterpages, wenn die Maus rüberhovert. runder und nicht die wörter abschneiden, soll eher wie bei Appels glass design.
+
+
+
+HTML: "<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IS's PORTFOLIO</title>
+  <link rel="stylesheet" href="portfoliocss.css">
+  <link href='https://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'>
+
+  <script src="https://kit.fontawesome.com/66aa7c98b3.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+
+  <nav class="navbar">
+    <div class="logo"><img src="https://static.vecteezy.com/system/resources/previews/006/421/580/non_2x/dj-logo-with-hoodie-man-design-element-for-logo-poster-card-banner-emblem-t-shirt-illustration-vector.jpg"></div>
+    <ul class="nav-list">
+      <li><a href="#home1">HOME</a></li>
+      <li><a href="#about">ABOUT</a></li>
+      <li><a href="#skills">SKILLS</a></li>
+      <li><a href="#portfolio">PORTFOLIO</a></li>
+      <li><a href="#contact">CONTACT</a></li>
+    </ul>
+  </nav>
+  <div class="Fp">
+    <section id="home1">
+      <div class="home">
+        <h2 style="color: rgb(27, 183, 204); "> HI I'm</h2>
+        <h1 class="name"><span style="color:orangered;">I</span>shwarya</h1>
+        <h3 style="color: aqua; font-size:28px;"> I am a web learning student,<br><i class="fab fa-aws" style="font-size: larger; color: orange;"></i> partner.</h3>
+
+        <ul class="sci">
+          <li>
+            <a href="https://www.facebook.com/deepak.sp.355" class="fac"><i class="fab fa-facebook"></i></a>
+          </li>
+          <li>
+            <a href="https://t.me/+919790870300" class="tw"><i class="fab fa-telegram"></i></a>
+          </li>
+
+      </div>
+    </section>
+    <section id="about">
+      <div class="about">
+        <h1 class="abouth">About Me</h1>
+        <div class="imgpara">
+          <div class="adminpic">
+            <img src="data:image/jpeg;base64,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" alt="admin">
+          </div>
+          <div class="para">
+            <p class="aboutp"><span style="font-weight: bold; font-size: larger;">HeLLo</span><br>
+              <br><span style="color: #0ab187; font-weight: bold; font-size: x-large;">I'm Ishwarya S </span>
+              <br><br>Styding Software Computer science at Thiruvalluvar University
+              <br> In"Shanmuga industries Arts & science college".<br> And a beginner in forntend development and learning
+              <i class="fab fa-aws" style="font-size: larger; color: orange;"></i>cloud service.
+            </p>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+    <section id="skills">
+      <div class="skiii">
+        <div>
+          <div class="myskill">
+            <h1>MY SKILLS</h1>
+          </div>
+          <div class="ms">
+            <div class="skills">
+              <h2>Html</h2>
+              <div class="bar">
+                <div class="html"><span>90%</span></div>
+              </div>
+              <h2>Css</h2>
+              <div class="bar">
+                <div class="css"><span>50%</span></div>
+              </div>
+              <h2>Aws</h2>
+              <div class="bar">
+                <div class="aws"><span>30%</span></div>
+              </div>
+              <h2>Python</h2>
+              <div class="bar">
+                <div class="python"><span>40%</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="portfolio" class="portfolio">
+      <h1 class="pro2"> My Projects</h1>
+      <div class="pro"><a href="#portfolio" class="projects1">
+          <div class="loader"></div>
+        </a><a href="https://codepen.io/Devakumar-S/pen/bNVQpyp" class="cp">
+          <div class="projects1"><i class="fa fa-codepen" style="margin: 80px;"></i></div>
+        </a><a href="#projects">
+          <div class="projects1">
+            <div class="loader"></div>
+          </div>
+        </a></div>
+
+    </section>
+  </div>
+  <section id="contact">
+    <div class="cont">
+      <h1 class="cm">CONTACT </h1>
+      <br>
+      <h2><span class="gm">G-mail</span><i class="fa fa-arrow-right fa-bounce" style="color: white; width: 40px;"></i><span class="id">ishu*****@gmail.com</span><i class="fas fa-envelope" style=" color: #0ed7e6;;"></i></h2>
+      <br>
+      <h1 class="sm" style="margin-top: 30px;"><span style="color: rgb(255, 0, 0); font-size: 3em; "> C</span>ontact Me ..<i class="fa fa-spinner fa-spin"></i>n</h1>
+      <ul class="sci2">
+
+      </ul>
+    </div>
+
+  </section>
+</body>
+
+</html>"
+
+CSS: "* {
+  padding: 0;
+
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Times New Roman", Times, serif;
+  scroll-behavior: smooth;
+}
+.Fp {
+  background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
+}
+.logo {
+  position: relative;
+  margin-left: 40px;
+  padding: 10px;
+}
+.logo img {
+  height: 100px;
+  width: 150px;
+  border-image: stretch;
+  border-radius: 50%;
+  background-color: transparent;
+}
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 40px 10% 0 10%;
+  font-size: larger;
+  margin-left: 20px;
+}
+::selection {
+  color: lightseagreen;
+  background-color: black;
+}
+.nav-list {
+  display: flex;
+  margin-left: 10%;
+}
+.navbar {
+  position: absolute;
+}
+nav ul li {
+  height: fit-content;
+  display: inline-flex;
+  align-items: center;
+  padding: 0 10px 0 30px;
+  margin: 10px 0px 20px 30px;
+}
+nav ul li a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+nav ul li a:hover {
+  color: rgb(12, 218, 33);
+  transition: 0.2s ease;
+  cursor: pointer;
+  border-style: outset;
+  border-radius: 35%;
+  box-shadow: 30px 40px 50px 0px #27829e, -20px -20px 50px hsl(120, 14%, 89%);
+}
+
+.home {
+  font-size: larger;
+  width: fit-content;
+  border-radius: 50px;
+  padding: 40px 20px 0px 5%;
+  border-width: 5px;
+  padding: 20% 2% 8% 5%;
+  margin-left: 4%;
+}
+.name {
+  margin: 10px;
+  color: white;
+  font-size: 100px;
+}
+.about {
+  background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
+}
+.abouth {
+  position: absolute;
+  font-size: 2em;
+  color: rgb(10, 228, 210);
+  padding: 50px 0px 60px 15pzx;
+  margin: 40px 0 35px 10px;
+  border-radius: 50px;
+  border-color: rgb(97, 50, 50);
+  border-style: solid;
+  width: fit-content;
+  margin-top: 30px;
+  margin-right: 25%;
+  margin-bottom: 5%;
+  margin-left: 10%;
+  background-color: grey;
+  box-shadow: 30px 40px 50px 0px #668791, -20px -20px 50px #dee6de;
+}
+.aboutp {
+  color: rgb(20, 143, 192);
+  font-size: larger;
+  border-style: outset;
+  width: fit-content;
+  border-radius: 50px;
+  border-width: 3px;
+  margin: 20px auto;
+  margin-left: 20%;
+  margin-right: 20px;
+  padding: 20px 50px 40px 20px;
+  box-shadow: 15px 15px 30px rgb(100, 136, 184),
+    -15px -15px 30px rgb(112, 104, 104);
+}
+.aws {
+  color: #ee9014;
+  font-size: larger;
+}
+.imgpara {
+  display: inline-flex;
+  padding: 20px 60px 55px 70px;
+  margin-top: 10%;
+}
+.adminpic {
+  width: fit-content;
+  height: 50vh;
+  border-radius: 50px;
+  border: solid;
+  border-color: #04afaf;
+  background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
+
+  overflow: hidden;
+  margin-left: 10%;
+  margin-bottom: 10%;
+}
+.adminpic img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  margin-inline: auto;
+}
+.skiii {
+  margin: 0px;
+  padding: 10px;
+  background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
+}
+
+.myskill h1 {
+  display: grid;
+  place-items: center;
+  padding: 7%;
+  margin: 0px 20px 60px 30%;
+  color: rgb(27, 206, 206);
+  text-shadow: 2px 2px 4px #e70b8c;
+  font-size: 2.5em;
+  font-weight: 900;
+}
+
+.ms {
+  padding: 20px;
+  margin: 10px 40px 70px 20%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-style: solid;
+  border-radius: 40px;
+  background: #212121;
+  width: fit-content;
+  overflow: hidden;
+  border-width: 0px;
+  box-shadow: 15px 15px 30px rgb(25, 25, 25), -15px -15px 30px rgb(60, 60, 60);
+}
+
+.skills h2 {
+  color: white;
+  font-size: 1.6em;
+  letter-spacing: 2px;
+  margin-top: 1.8%;
+  background: #212121;
+}
+.bar {
+  width: 500px;
+  height: 20px;
+  border-radius: 40px;
+  border-style: solid;
+  border-color: rgb(233, 137, 13);
+}
+.html {
+  height: 15px;
+  border-radius: 40px;
+  background: rgb(126, 9, 116);
+  width: 0%;
+  animation: html 1s linear forwards;
+}
+.aws {
+  height: 15px;
+  border-radius: 40px;
+  background: rgb(126, 9, 116);
+  width: 0%;
+  animation: aws 1s linear forwards;
+}
+.css {
+  height: 15px;
+  border-radius: 40px;
+  background: rgb(126, 9, 116);
+  width: 0%;
+  animation: css 1s linear forwards;
+}
+.python {
+  height: 15px;
+  border-radius: 40px;
+  background: rgb(126, 9, 116);
+  width: 0%;
+  animation: python 1s linear forwards;
+}
+
+.html span {
+  color: rgb(252, 248, 248);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 30px;
+
+  width: fit-content;
+  border-radius: 50%;
+  background-color: rgb(7, 6, 6);
+  float: right;
+  margin-top: -5px;
+  font-size: 1.1em;
+  border: 1px solid #e91e63;
+}
+.css span {
+  color: rgb(250, 248, 248);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 30px;
+
+  width: fit-content;
+  border-radius: 50%;
+  background-color: rgb(8, 7, 7);
+  float: right;
+  margin-top: -5px;
+  font-size: 1.1em;
+  border: 1px solid #e91e63;
+}
+
+.aws span {
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 30px;
+
+  width: fit-content;
+  border-radius: 50%;
+  background-color: rgb(12, 4, 4);
+  float: right;
+  margin-top: -5px;
+  font-size: 1.1em;
+  border: 1px solid #e91e63;
+}
+
+.python span {
+  color: whitesmoke;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 30px;
+
+  width: fit-content;
+  border-radius: 50%;
+  background-color: rgb(14, 3, 3);
+  float: right;
+  margin-top: -5px;
+  font-size: 1.1em;
+  border: 1px solid #e91e63;
+}
+
+@keyframes html {
+  100% {
+    width: 90%;
+  }
+}
+@keyframes css {
+  100% {
+    width: 50%;
+  }
+}
+@keyframes aws {
+  100% {
+    width: 30%;
+  }
+}
+@keyframes python {
+  100% {
+    width: 40%;
+  }
+}
+
+.sci {
+  position: relative;
+  display: flex;
+  margin-top: 15px;
+  justify-content: center;
+
+  border-bottom-color: rgb(13, 216, 199);
+  border-width: 6px;
+  margin-bottom: 5px;
+  gap: 20px;
+}
+.sci li {
+  list-style: none;
+  margin: 6px;
+}
+.sci li a {
+  width: px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  background: transparent;
+  font-size: 2.2em;
+  color: #cc33ff;
+  text-decoration: none;
+  box-shadow: 0 6px 6px rgba(214, 14, 14, 0.16), 0 6px 6px rgba(0, 0, 0, 0.23);
+
+  display: space;
+}
+.sci li a.tw:hover {
+  color: #1fc4f7;
+}
+.sci li a.fac:hover {
+  background-color: white;
+  color: #130fdf;
+}
+.sci li a.lin:hover {
+  color: blue;
+}
+.sci li a.ins:hover {
+  color: rgb(230, 11, 175);
+}
+.sci li a.codpen:hover {
+  color: #0ed7e6;
+}
+
+.pro2 {
+  color: rgb(211, 197, 197);
+  padding-top: 80px;
+  display: flex;
+  justify-content: center;
+  color: white;
+  text-shadow: 1px 1px 1px rgb(238, 231, 231), 0 0 20px rgb(237, 237, 240),
+    0 0 5px rgb(235, 235, 243);
+  font-size: 2.5em;
+}
+.portfolio {
+  background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
+}
+.pro:not(.pro2) {
+  padding: 13% 10px 17% 10%;
+  display: flex;
+  gap: 15%;
+}
+.projects1 {
+  position: relative;
+  width: 250px; /* Double the width to accommodate two cards */
+  height: 35vh;
+  border-radius: 20px;
+  background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
+}
+.projects1 {
+  display: flex;
+  text-align: center;
+  text-decoration: none;
+  font-size: 5rem;
+  font-weight: 500;
+}
+.cp {
+  text-decoration: none;
+}
+.projects1:hover {
+  color: #0ed7e6;
+  box-shadow: 0 0.5em 0.5em -0.4em var(--hover);
+  transform: translateY(-0.25em);
+  cursor: grab;
+  box-shadow: 9px 20px 70px rgb(243, 225, 225), -8px -15px 50px #0eeeee;
+}
+.loader {
+  border: 16px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 16px solid rgb(4, 4, 8);
+  border-right: 16px solid #0ed7e6;
+  border-bottom: 16px solid #0d0f0f;
+  border-left: 16px solid #0ed7e6;
+  width: 100px;
+  height: 100px;
+  -webkit-animation: spin 4s linear infinite;
+  animation: spin 4s linear infinite;
+  margin: 70px;
+}
+
+@-webkit-keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+.cs {
+  display: flex;
+  padding: 50% 20px 50px 30px;
+}
+.cont {
+  position: absolute;
+  width: 100%;
+  background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
+}
+.cm {
+  margin: 75px 0 0 27%;
+  width: fit-content;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: rgb(246, 243, 252);
+  text-shadow: 3px 6px 5px #0da5d3;
+  font-size: 2.5em;
+}
+.gm {
+  display: inline-flex;
+  align-items: center;
+  border-style: dotted;
+  padding: 10px;
+  border-radius: 40px;
+  color: #2ae2e9;
+  border-color: #4a1ab9;
+  margin: 40px 0 0 20%;
+}
+.id {
+  color: #1ef1e7;
+  justify-content: space-between;
+  margin: 0 0 0% 4%;
+  letter-spacing: 1.4px;
+  font-weight: 100;
+}
+.id:hover {
+  text-decoration: underline;
+  color: white;
+}
+.envelope {
+  margin: 0 5px 0 5px;
+}
+.envelope:hover {
+  transform: scale(1);
+}
+.sm {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 0 10px 0 20px;
+  color: #0ed7e6;
+}
+.sci2 {
+  position: relative;
+  display: flex;
+  margin: 25px 0 0 30%;
+  justify-content: center;
+  width: fit-content;
+  border-top-color: rgb(9, 153, 179);
+  box-shadow: 20px #1275a3;
+  padding-bottom: 9%;
+}
+.sci2 li {
+  list-style: none;
+  margin: 0 25px 0 0;
+}
+.sci2 li a {
+  width: 45px;
+  height: 45px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  background: transparent;
+  font-size: 2.2em;
+  color: #881dac;
+  text-decoration: none;
+  box-shadow: 0 7px 7px rgba(53, 174, 190, 0.16),
+    0 6px 6px rgba(20, 141, 135, 0.23);
+  transition: 0.8s;
+  display: space;
+}
+.sci2 li a.fac:hover {
+  background: rgb(2, 6, 235);
+  color: #fff;
+  transition: 0s;
+}
+.sci2 li a.tw:hover {
+  background: white;
+  color: blue;
+  transition: 0s;
+}
+.sci2 li a.lin:hover {
+  background: #1f1fcf;
+  color: #fff;
+  transition: 0s;
+}
+.sci2 li a.ins:hover {
+  background: #ff3399;
+  color: #fff;
+  transition: 0s;
+}
+.sci2 li a.codpe:hover {
+  background-color: black;
+  color: #0ed7e6;
+  transition: 0.1s;
+}
+
+@media only screen and (max-width: 600px) {
+  .logo {
+    display: none;
+  }
+  .home {
+    font-size: 35px;
+  }
+
+  .name {
+    font-size: 45px;
+    margin-top: 80%;
+  }
+  .sci {
+    margin-top: 35px;
+    border-width: 6px;
+    padding-bottom: 30px;
+    gap: 15px;
+  }
+  .sci li a {
+    width: 10 px;
+    font-size: 1em;
+    display: space;
+  }
+
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    padding-left: 100%;
+    color: white;
+  }
+  .navbar {
+    display: none;
+  }
+  .nav-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    right: 0;
+    text-align: center;
+  }
+
+  .nav-list li {
+    margin: 10px 0;
+  }
+  .adminpic {
+    display: none;
+  }
+  .aboutp {
+    width: 130%;
+    margin-top: 40px;
+    margin-left: -20px;
+    margin-right: 30px;
+    padding: 20px 50px 40px 20px;
+  }
+  .bar {
+    width: 230px;
+    height: 25px;
+    border-radius: 10px;
+    border-style: solid;
+  }
+  .html {
+    height: 7.5px;
+    border-radius: 20px;
+
+    height: 20px;
+  }
+  .aws {
+    height: 7.5px;
+    border-radius: 20px;
+    height: 20px;
+  }
+  .css {
+    height: 7.5px;
+    border-radius: 20px;
+    height: 20px;
+  }
+  .python {
+    height: 7.5px;
+    border-radius: 20px;
+    height: 20px;
+  }
+  .html span {
+    font-size: 1em;
+  }
+  .css span {
+    font-size: 1em;
+  }
+
+  .aws span {
+    font-size: 1em;
+  }
+
+  .python span {
+    font-size: 1em;
+  }
+  .ms {
+    padding: 20px 20px 40px 20px;
+    margin: 10px 40px 70px 10%;
+  }
+  .skills h2 {
+    font-size: 1.5em;
+    margin-top: 2%;
+  }
+  .loader {
+    display: none;
+  }
+  .sci2 {
+    margin: 35px 40% 20px 0px;
+    border-width: 6px;
+    padding-left: 20px;
+  }
+  .sci2 li a {
+    width: 10 px;
+    font-size: 2em;
+  }
+}
+"

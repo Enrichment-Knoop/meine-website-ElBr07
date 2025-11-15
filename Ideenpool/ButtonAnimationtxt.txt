@@ -1,0 +1,334 @@
+Get Startdet Button + Animation
+
+
+
+HTML: "<header class="site-header">
+  <div class="container">
+    <a href="#" class="brand">
+      <span class="brand-mark">A</span>
+      <span class="brand-text"></span>
+    </a>
+
+    <nav class="main-nav">
+      <button
+        class="nav-toggle"
+        id="navToggle"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </button>
+
+      <ul class="nav-links">
+        <li class="nav-item active"><a href="#">Home</a></li>
+        <li class="nav-item"><a href="#">Features</a></li>
+        <li class="nav-item"><a href="#">Pricing</a></li>
+        <li class="nav-item"><a href="#">Blog</a></li>
+        <li class="nav-item"><a href="#">Contact</a></li>
+        <li class="nav-item nav-item-cta-mobile">
+          <a href="#" class="btn-primary">Get Started</a>
+        </li>
+      </ul>
+
+      <a href="#" class="btn-primary nav-cta-desktop">Get Started</a>
+    </nav>
+  </div>
+</header>
+
+<main style="padding: 120px 16px; max-width: 900px; margin: 0 auto;">
+  <h1>Hero section</h1>
+  <p>
+    Scroll and resize the window to see how the navigation behaves. This is a
+    demo placeholder content.
+  </p>
+</main>
+"
+
+
+CSS:"/* ---------- Basic reset ---------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+  background: radial-gradient(circle at top, #121826 0, #050816 45%, #02010a 100%);
+  color: #f9fafb;
+}
+
+/* ---------- Header + container ---------- */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  backdrop-filter: blur(16px);
+  background: linear-gradient(
+    to right,
+    rgba(10, 10, 20, 0.9),
+    rgba(5, 8, 22, 0.9)
+  );
+  border-bottom: 1px solid rgba(148, 163, 184, 0.15);
+}
+
+.container {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+/* ---------- Brand ---------- */
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+
+.brand-mark {
+  width: 32px;
+  height: 32px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 18px;
+  background: conic-gradient(
+    from 180deg,
+    #22d3ee,
+    #6366f1,
+    #f97316,
+    #22d3ee
+  );
+  color: #020617;
+  box-shadow: 0 0 20px rgba(56, 189, 248, 0.45);
+}
+
+.brand-text {
+  font-weight: 600;
+  font-size: 18px;
+  letter-spacing: 0.04em;
+  color: #e5e7eb;
+}
+
+/* ---------- Nav layout ---------- */
+.main-nav {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  position: relative;
+}
+
+/* ---------- Desktop links ---------- */
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 22px;
+  padding: 0;
+  margin: 0;
+}
+
+.nav-item {
+  position: relative;
+}
+
+.nav-item a {
+  text-decoration: none;
+  font-size: 15px;
+  color: #cbd5f5;
+  padding: 6px 0;
+  display: inline-block;
+  transition: color 0.18s ease, opacity 0.18s ease;
+}
+
+/* Animated underline */
+.nav-item a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 0;
+  height: 2px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #22d3ee, #6366f1);
+  transition: width 0.22s ease;
+}
+
+.nav-item:hover a {
+  color: #e5e7ff;
+}
+
+.nav-item:hover a::after,
+.nav-item.active a::after {
+  width: 100%;
+}
+
+/* ---------- CTA button ---------- */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 18px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  border: 1px solid rgba(129, 140, 248, 0.8);
+  background: radial-gradient(circle at top left, #4f46e5, #1d4ed8);
+  color: #f9fafb;
+  box-shadow: 0 10px 25px rgba(79, 70, 229, 0.45);
+  transition: transform 0.12s ease, box-shadow 0.12s ease,
+    background 0.2s ease, border-color 0.2s ease;
+}
+
+.btn-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 16px 35px rgba(59, 130, 246, 0.55);
+  background: radial-gradient(circle at top left, #6366f1, #2563eb);
+  border-color: rgba(129, 140, 248, 1);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+  box-shadow: 0 6px 12px rgba(37, 99, 235, 0.6);
+}
+
+/* Mobile CTA item */
+.nav-item-cta-mobile {
+  display: none;
+}
+
+/* Desktop CTA */
+.nav-cta-desktop {
+  display: inline-flex;
+}
+
+/* ---------- Hamburger toggle ---------- */
+.nav-toggle {
+  display: none;
+  position: relative;
+  width: 34px;
+  height: 34px;
+  border-radius: 999px;
+  border: 1px solid rgba(148, 163, 184, 0.5);
+  background: radial-gradient(circle at top, #020617, #020617 60%, #020617);
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+.nav-toggle .bar {
+  width: 16px;
+  height: 2px;
+  border-radius: 999px;
+  background: #e5e7eb;
+  display: block;
+  transition: transform 0.18s ease, opacity 0.18s ease;
+}
+
+.nav-toggle .bar + .bar {
+  margin-top: 3px;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 768px) {
+  .container {
+    padding: 10px 14px;
+  }
+
+  .nav-links {
+    position: fixed;
+    inset: 0 0 0 30%;
+    padding: 80px 24px 24px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 18px;
+    background: radial-gradient(
+      circle at top,
+      rgba(15, 23, 42, 0.98),
+      rgba(15, 23, 42, 0.98)
+    );
+    border-left: 1px solid rgba(148, 163, 184, 0.25);
+    transform: translateX(100%);
+    transition: transform 0.26s ease;
+  }
+
+  .main-nav.is-open .nav-links {
+    transform: translateX(0);
+  }
+
+  .nav-toggle {
+    display: inline-flex;
+  }
+
+  .nav-cta-desktop {
+    display: none;
+  }
+
+  .nav-item-cta-mobile {
+    display: block;
+    margin-top: 16px;
+    width: 100%;
+  }
+
+  .nav-item-cta-mobile .btn-primary {
+    width: 100%;
+    justify-content: center;
+  }
+
+  /* Hamburger icon animation to X */
+  .main-nav.is-open .bar:nth-child(1) {
+    transform: translateY(5px) rotate(45deg);
+  }
+
+  .main-nav.is-open .bar:nth-child(2) {
+    opacity: 0;
+  }
+
+  .main-nav.is-open .bar:nth-child(3) {
+    transform: translateY(-5px) rotate(-45deg);
+  }
+}
+
+/* Subtle depth shadow for the header */
+.site-header::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  box-shadow: 0 18px 45px rgba(15, 23, 42, 0.9);
+  opacity: 0.6;
+  z-index: -1;
+}
+"
+
+
+JS: "const navToggle = document.getElementById("navToggle");
+const mainNav = document.querySelector(".main-nav");
+
+navToggle.addEventListener("click", () => {
+  const isOpen = mainNav.classList.toggle("is-open");
+  navToggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
+});
+
+// Close mobile menu when clicking a link
+document.querySelectorAll(".nav-links a").forEach((link) => {
+  link.addEventListener("click", () => {
+    if (mainNav.classList.contains("is-open")) {
+      mainNav.classList.remove("is-open");
+      navToggle.setAttribute("aria-expanded", "false");
+    }
+  });
+});
+"

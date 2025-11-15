@@ -1,27 +1,29 @@
 /* --------------------------------------------------------------
-   Grundvariablen – Farben, Blur‑Radius usw.
+   1. Grundvariablen & Reset
    -------------------------------------------------------------- */
 :root {
-    --bg-color:    #0A0535;   /* dunkler Hintergrund */
-    --text-color: #e0e0e0;   /* helle Schrift */
-    --accent-blue:#4169e1;   /* royal‑blau */
-    --blur-radius:12px;      /* für Navbar & Footer */
+    --bg-color: #0A0535;
+    /* dunkler Hintergrund */
+    --text-color: #e0e0e0;
+    /* helle Schrift */
+    --accent-blue: #4169e1;
+    /* primäre Akzentfarbe */
+    --blur-radius: 12px;
+    /* für Glass‑Effekte */
 }
 
-/* --------------------------------------------------------------
-   Reset – sorgt für konsistentes Verhalten in allen Browsern
-   -------------------------------------------------------------- */
-* {
+/* Reset */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
 }
 
-/* --------------------------------------------------------------
-   Grundlayout – Body & Hauptcontainer
-   -------------------------------------------------------------- */
+/* Grundschrift */
 body {
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: "Times New Roman", Times, serif;
     background: var(--bg-color);
     color: var(--text-color);
     min-height: 100vh;
@@ -29,57 +31,172 @@ body {
     flex-direction: column;
 }
 
-/* Container für den Seiteninhalt (zwischen Header & Footer) */
-.container {
-    flex: 1;                     /* füllt den verbleibenden Raum */
-    padding: 2rem;
-    max-width: 960px;
-    margin: 0 auto;
-}
-
 /* --------------------------------------------------------------
-   Navigationsleiste – zentriert, runder Blur‑Hintergrund
+   2. GLASS‑NAVBAR
    -------------------------------------------------------------- */
 .navbar {
-    display: flex;                     /* Flex‑Layout für die Links */
-    gap: 1rem;                         /* Abstand zwischen Links */
-    padding: 0.8rem 1.5rem;
-    background: rgba(10, 10, 10, 0.6); /* leicht transparent */
+    position: fixed;
+    top: 1rem;
+    left: 50%;
+    transform: translateX(-50%);
+    max-width: 90%;
+    padding: 0.8rem 2rem;
+    background: rgba(255, 255, 255, 0.07);
     backdrop-filter: blur(var(--blur-radius));
-    border-radius: 12px;               /* runde Ecken */
-    position: sticky;
-    top: 1rem;                         /* Abstand zum oberen Rand */
-    margin: 0 auto;                    /* zentriert die Leiste */
-    max-width: 960px;                  /* optionale Max‑Breite */
-    width: fit-content;                /* passt sich dem Inhalt an */
-    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-    z-index: 10;
+    border-radius: 15px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
 }
 
-/* Einzelne Navigations‑Links */
-.nav-item {
+/* Wrapper für Mobile‑Menu */
+.main-nav {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+/* Logo‑Platzhalter */
+.logo-placeholder {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.15);
+    border: 2px solid var(--accent-blue);
+}
+
+/* Hamburger‑Button (nur bei kleinen Bildschirmen sichtbar) */
+.nav-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 999px;
+    border: 1px solid rgba(148, 163, 184, 0.5);
+    cursor: pointer;
+}
+
+.nav-toggle .bar {
+    width: 16px;
+    height: 2px;
+    background: #e5e7eb;
+    border-radius: 999px;
+    margin: 3px auto;
+    transition: transform 0.18s ease, opacity 0.18s ease;
+}
+
+/* Navigation‑Links */
+.nav-links {
+    display: flex;
+    gap: 1.5rem;
+    list-style: none;
+}
+
+/* Einzelner Link – bekommt das Button‑Hover‑Design */
+.nav-link {
+    position: relative;
+    display: inline-block;
+    padding: 0.4rem 0.8rem;
+    font-weight: 600;
     color: var(--accent-blue);
     text-decoration: none;
-    padding: 0.4rem 0.8rem;
-    border-radius: 4px;
-    transition: all 0.2s ease;
+    border-radius: 12px;
+    transition:
+        transform 0.12s ease,
+        box-shadow 0.12s ease,
+        background 0.2s ease,
+        color 0.18s ease;
 }
 
-/* Hover‑Effekt – weißer Rand, kein Schatten */
-.nav-item:hover {
-    border: 2px solid #fff;
-    box-shadow: none;
+/* Hover‑Effekt (wie „Get Started“) */
+.nav-link:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 16px 35px rgba(59, 130, 246, 0.55);
+    background: radial-gradient(circle at top left, #6366f1, #2563eb);
+    color: #fff;
+}
+
+/* Unter‑Linie‑Animation */
+.nav-link::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -4px;
+    width: 0;
+    height: 2px;
+    border-radius: 999px;
+    background: linear-gradient(90deg, #22d3ee, #6366f1);
+    transition: width 0.22s ease;
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+    width: 100%;
 }
 
 /* --------------------------------------------------------------
-   Buttons – einheitlicher Stil
+   3. Layout für den Seiteninhalt
    -------------------------------------------------------------- */
+.Fp {
+    background: radial-gradient(circle at bottom, #1b2735 0%, #090a0f 100%);
+    flex: 1;
+    padding-top: 120px;
+    /* Platz für die fixe Nav‑Bar */
+}
+
+/* MODUS‑WAHL – kompakt, direkt unter der Navbar */
+#mode-choice {
+    text-align: center;
+    margin: 1rem auto 2rem;
+    /* Abstand zur Navbar und zum nachfolgenden Inhalt */
+    max-width: 600px;
+    /* Breite begrenzen, damit es zentriert bleibt */
+}
+
+#mode-choice h2 {
+    font-size: 1.8rem;
+    margin-bottom: 0.8rem;
+}
+
+#mode-choice .btn {
+    font-size: 1.1rem;
+    padding: 0.7rem 1.4rem;
+}
+
+/* HOME‑Bereich */
+.home {
+    font-size: larger;
+    width: fit-content;
+    border-radius: 50px;
+    padding: 20% 2% 8% 5%;
+    margin-left: 4%;
+}
+
+.name {
+    margin: 10px;
+    color: white;
+    font-size: 100px;
+}
+
+/* Social‑Icons */
+.sci {
+    display: flex;
+    gap: 20px;
+    margin-top: 15px;
+    justify-content: center;
+}
+
+.sci li a {
+    font-size: 2.2em;
+    color: #cc33ff;
+}
+
+/* Buttons (Ja / Nein) – definiert in #mode-choice, Basis‑Stile */
 .btn {
     background: var(--accent-blue);
     color: #fff;
     border: none;
-    padding: 0.6rem 1.2rem;
-    margin: 0.5rem;
     border-radius: 4px;
     cursor: pointer;
     transition: transform 0.1s ease;
@@ -89,60 +206,168 @@ body {
     transform: scale(1.05);
 }
 
-/* --------------------------------------------------------------
-   Footer – zentriert, Blur‑Hintergrund
-   -------------------------------------------------------------- */
+/* HIDDEN‑Klasse */
+.hidden {
+    display: none;
+}
+
+/* INFO‑SECTION */
+#info {
+    text-align: center;
+    margin-top: 2rem;
+}
+
+/* ABOUT‑Bereich */
+.about {
+    background: radial-gradient(circle at bottom, #1b2735 0%, #090a0f 100%);
+}
+
+.abouth {
+    font-size: 2em;
+    color: #0ae2d2;
+    margin: 40px 0 35px 10px;
+    padding: 10px;
+    background: grey;
+    border-radius: 10px;
+}
+
+.aboutp {
+    color: #1490c0;
+    font-size: larger;
+    margin: 20px auto;
+    padding: 20px 50px 40px 20px;
+    border: 3px solid #04afaf;
+    border-radius: 10px;
+}
+
+/* Profil‑Bild‑Platzhalter */
+.adminpic-placeholder {
+    width: 100%;
+    height: 50vh;
+    background: rgba(255, 255, 255, 0.07);
+    border: 2px dashed var(--accent-blue);
+    border-radius: 10px;
+}
+
+/* SKILLS‑Platzhalter */
+.myskill h1 {
+    text-align: center;
+    color: #1bcedc;
+    margin: 30px 0;
+}
+
+/* PORTFOLIO‑Platzhalter */
+.pro2 {
+    text-align: center;
+    color: #fff;
+    font-size: 2.5em;
+    margin-top: 80px;
+}
+
+.projects1 {
+    display: inline-block;
+    width: 250px;
+    height: 35vh;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 20px;
+    text-align: center;
+    line-height: 35vh;
+    color: #fff;
+    text-decoration: none;
+    font-size: 1.2rem;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.projects1:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+}
+
+/* FOOTER – leichtes Glass‑Design */
 .site-footer {
     background: rgba(10, 10, 10, 0.6);
     backdrop-filter: blur(var(--blur-radius));
     color: var(--text-color);
-    text-align: center;            /* Text und Links zentrieren */
+    text-align: center;
     padding: 1rem 0;
-    margin-top: 2rem;
     font-size: 0.9rem;
 }
 
-/* Flex‑Container für die Zeile mit den Impressums‑Links */
 .site-footer p:last-of-type {
     display: flex;
     justify-content: center;
-    gap: 1rem;                     /* Abstand zwischen den Links */
+    gap: 1rem;
     margin-top: 0.4rem;
 }
 
-/* Links im Footer */
-.site-footer a {
-    color: var(--accent-blue);
-    text-decoration: none;
-    transition: color 0.2s ease;
-}
-
-.site-footer a:hover {
-    color: #fff;
-}
-
 /* --------------------------------------------------------------
-   Hilfsklassen
+   4. Responsive – Mobile‑Menu
    -------------------------------------------------------------- */
-.hidden { display: none; }
+@media (max-width: 768px) {
+    .nav-toggle {
+        display: flex;
+    }
 
-/* --------------------------------------------------------------
-   Responsive Anpassungen
-   -------------------------------------------------------------- */
-@media (max-width: 600px) {
-    /* Navbar wird vertikal, damit sie auf kleinen Bildschirmen passt */
-    .navbar {
+    .nav-links {
+        position: fixed;
+        inset: 0 0 0 30%;
+        padding: 80px 24px 24px;
         flex-direction: column;
         align-items: flex-start;
-        width: 100%;
-        max-width: none;
+        gap: 1rem;
+        background: rgba(15, 23, 42, 0.98);
+        border-left: 1px solid rgba(148, 163, 184, 0.25);
+        transform: translateX(100%);
+        transition: transform 0.26s ease;
     }
-}
 
-/* Footer‑Links untereinander bei sehr kleinen Bildschirmen */
-@media (max-width: 400px) {
-    .site-footer p:last-of-type {
-        flex-direction: column;
-        gap: 0.5rem;
+    .main-nav.is-open .nav-links {
+        transform: translateX(0);
     }
+
+    /* Hamburger‑zu‑X‑Animation */
+    .main-nav.is-open .nav-toggle .bar:nth-child(1) {
+        transform: translateY(5px) rotate(45deg);
+    }
+
+    .main-nav.is-open .nav-toggle .bar:nth-child(2) {
+        opacity: 0;
+    }
+
+    .main-nav.is-open .nav-toggle .bar:nth-child(3) {
+        transform: translateY(-5px) rotate(-45deg);
+    }
+
+    .nav-links .nav-item {
+        width: 100%;
+    }
+
+    /* --------------------------------------------------------------
+   1️⃣  Aktiver Nav‑Link – leuchtender Schatten
+   -------------------------------------------------------------- */
+    .nav-link.active {
+        /* Grundfarbe des Links bleibt erhalten (z. B. var(--accent-blue)) */
+        color: var(--accent-blue);
+
+        /* Leuchtender äußereffekt – animierter Schatten */
+        box-shadow:
+            0 0 8px 2px rgba(65, 105, 225, 0.7),
+            /* leichter Blau‑Glow */
+            0 0 16px 4px rgba(65, 105, 225, 0.5),
+            /* stärkerer Glow */
+            0 0 24px 6px rgba(65, 105, 225, 0.3);
+        /* diffuser Rand */
+
+        /* Optional: leichte Rundung, damit der Glow die Form des Buttons folgt */
+        border-radius: 12px;
+
+        /* Übergang, damit das Aktiv‑Setzen sanft wirkt */
+        transition: box-shadow 0.3s ease, color 0.3s ease;
+    }
+
+    /* Hover‑Effekt bleibt erhalten – überschreibt nicht das .active‑Styling */
+    .nav-link:hover {
+        /* (Deine bestehenden Hover‑Regeln) */
+    }
+
 }

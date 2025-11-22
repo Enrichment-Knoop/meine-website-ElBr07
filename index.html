@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home – Elias Braun</title>
-
+    <title>Hime – Elias Braun</title>
+    <script src="loadVersion.js"></script>
     <!-- Globales Stylesheet – Root‑relativ -->
     <link rel="stylesheet" href="style.css">
 
@@ -34,20 +34,23 @@
                 <li class="nav-item"><a href="index.html" class="nav-link">HOME</a></li>
 
                 <!-- Die übrigen Links sind relativ zum Root, deshalb ebenfalls mit / beginnen -->
-                <li class="nav-item"><a href="pages/about/" class="nav-link">ABOUT</a></li>
-                <li class="nav-item"><a href="pages/skills/" class="nav-link">SKILLS</a></li>
-                <li class="nav-item"><a href="pages/portfolio/" class="nav-link">PORTFOLIO</a></li>
-                <li class="nav-item"><a href="pages/contact/" class="nav-link">CONTACT</a></li>
+                <li class="nav-item"><a href="pages/about.html" class="nav-link">ABOUT</a></li>
+                <li class="nav-item"><a href="pages/skills.html" class="nav-link">SKILLS</a></li>
+                <li class="nav-item"><a href="pages/portfolio.html" class="nav-link">PORTFOLIO</a></li>
+                <li class="nav-item"><a href="pages/contact.html" class="nav-link">CONTACT</a></li>
             </ul>
         </div>
     </nav>
-
     <!-- ====================  MODUS‑WAHL (direkt unter Navbar) ==================== -->
     <section id="mode-choice">
-        <h2>Willkommen! Möchtest du die Seite spielerisch erleben?</h2>
-        <button class="btn" id="yes-btn">Ja, lass uns spielen!</button>
-        <button class="btn" id="no-btn">Nein, ich will alles sofort sehen.</button>
+        <div class="mode-box"><!--  ← neuer Wrapper -->
+            <h2>Willkommen! Möchtest du die Seite spielerisch erleben?</h2>
+            <button class="btn" id="yes-btn">Ja, lass uns spielen!</button>
+            <button class="btn" id="no-btn">Nein, ich will alles sofort sehen.</button>
+        </div>
     </section>
+
+
 
     <!-- ====================  HERO / HOME ==================== -->
     <div class="Fp">

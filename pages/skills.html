@@ -5,12 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Skills – Elias Braun</title>
-    <script src="loadVersion.js"></script>
+    <script src="../loadVersion.js"></script>
+
     <!-- Globales CSS -->
     <link rel="stylesheet" href="../style.css">
-
-    <!-- Font‑Awesome -->
-    <script src="https://kit.fontawesome.com/66aa7c98b3.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -19,19 +17,34 @@
     <nav class="navbar">
         <div class="main-nav">
 
+            <!-- Logo (optional) -->
             <div class="logo-placeholder" aria-label="Logo"></div>
 
-            <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+            <!-- ----------- DESKTOP‑MENÜ (sichtbar ab 1024 px) ----------- -->
+            <ul class="nav-links desktop">
+                <li><a href="../index.html" class="nav-link">HOME</a></li>
+                <li><a href="about.html" class="nav-link">ABOUT</a></li>
+                <li><a href="skills.html" class="nav-link">SKILLS</a></li>
+                <li><a href="portfolio.html" class="nav-link">PORTFOLIO</a></li>
+                <li><a href="contact.html" class="nav-link">CONTACT</a></li>
+            </ul>
+
+            <!-- ----------- HAMBURGER‑ICON (nur < 1024 px) ----------- -->
+            <button class="nav-toggle" aria-expanded="false" aria-label="Navigation öffnen">
+                <img class="nav-icon" src="../assets/icons/menu_24dp_A7C7FA_FILL0_wght400_GRAD0_opsz24.svg" alt="Menu"
+                    data-menu-src="../assets/icons/menu_24dp_A7C7FA_FILL0_wght400_GRAD0_opsz24.svg"
+                    data-close-src="../assets/icons/arrow_drop_down_24dp_A7C7FA_FILL0_wght400_GRAD0_opsz24.svg">
             </button>
 
-            <ul class="nav-links">
-                <li class="nav-item"><a href="../index.html" class="nav-link">HOME</a></li>
-                <li class="nav-item"><a href="about.html" class="nav-link">ABOUT</a></li>
-                <li class="nav-item"><a href="skills.html" class="nav-link">SKILLS</a></li>
-                <li class="nav-item"><a href="portfolio.html" class="nav-link">PORTFOLIO</a></li>
-                <li class="nav-item"><a href="contact.html" class="nav-link">CONTACT</a></li>
+            <!-- ----------- MOBILE‑MENÜ (versteckt, wird per JS eingeblendet) ----------- -->
+            <ul class="nav-links mobile">
+                <li><a href="../index.html" class="nav-link">HOME</a></li>
+                <li><a href="about.html" class="nav-link">ABOUT</a></li>
+                <li><a href="skills.html" class="nav-link">SKILLS</a></li>
+                <li><a href="portfolio.html" class="nav-link">PORTFOLIO</a></li>
+                <li><a href="contact.html" class="nav-link">CONTACT</a></li>
             </ul>
+
         </div>
     </nav>
 

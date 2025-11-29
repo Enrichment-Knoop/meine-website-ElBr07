@@ -11,7 +11,7 @@
     --blur-radius: 12px;
     /* für Glass‑Effekte */
     --navbar-height: 120px;
-    /* Höhe inkl. Abstand zum nächsten Element */
+    /* Höhe inkl. Abstand */
 }
 
 /* Reset */
@@ -23,9 +23,8 @@
     padding: 0;
 }
 
-/* Grundschrift & Layout */
+/* Grundlayout */
 body {
-    /* Abstand für die fixe Nav‑Bar – wirkt für alle Seiten */
     padding-top: var(--navbar-height);
     font-family: "Times New Roman", Times, serif;
     background: var(--bg-color);
@@ -41,7 +40,6 @@ body {
 .navbar {
     position: fixed;
     top: 1rem;
-    /* etwas Abstand zum oberen Rand */
     left: 50%;
     transform: translateX(-50%);
     max-width: 90%;
@@ -53,10 +51,11 @@ body {
     z-index: 1000;
 }
 
-/* Wrapper für Mobile‑Menu */
+/* Wrapper für das eigentliche Menü */
 .main-nav {
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 1.5rem;
 }
 
@@ -69,33 +68,14 @@ body {
     border: 2px solid var(--accent-blue);
 }
 
-/* Hamburger‑Button (nur mobil) */
-.nav-toggle {
-    display: none;
-    flex-direction: column;
-    justify-content: center;
-    width: 34px;
-    height: 34px;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 999px;
-    border: 1px solid rgba(148, 163, 184, 0.5);
-    cursor: pointer;
-}
-
-.nav-toggle .bar {
-    width: 16px;
-    height: 2px;
-    background: #e5e7eb;
-    border-radius: 999px;
-    margin: 3px auto;
-    transition: transform 0.18s ease, opacity 0.18s ease;
-}
-
-/* Navigation‑Links */
+/* --------------------------------------------------------------
+   3. Gemeinsame Styles für beide Nav‑Listen
+   -------------------------------------------------------------- */
 .nav-links {
-    display: flex;
-    gap: 1.5rem;
     list-style: none;
+    display: flex;
+    /* Desktop‑Layout – wird im Mobile‑Media‑Query überschrieben */
+    gap: 1.5rem;
 }
 
 /* Einzelner Link – Button‑Look */
@@ -108,13 +88,13 @@ body {
     text-decoration: none;
     border-radius: 12px;
     transition:
-        transform 0.12s ease,
-        box-shadow 0.12s ease,
-        background 0.2s ease,
-        color 0.18s ease;
+        transform .12s ease,
+        box-shadow .12s ease,
+        background .2s ease,
+        color .18s ease;
 }
 
-/* Hover‑Effekt (wie „Get Started“) */
+/* Hover‑Effekt */
 .nav-link:hover {
     transform: translateY(-1px);
     box-shadow: 0 16px 35px rgba(59, 130, 246, 0.55);
@@ -132,7 +112,7 @@ body {
     height: 2px;
     border-radius: 999px;
     background: linear-gradient(90deg, #22d3ee, #6366f1);
-    transition: width 0.22s ease;
+    transition: width .22s ease;
 }
 
 .nav-link:hover::after,
@@ -140,45 +120,129 @@ body {
     width: 100%;
 }
 
-/* Aktiver Link – leuchtender Rahmen (wie vorher) */
+/* Aktiver Link */
 .nav-link.active {
     box-shadow:
         0 0 8px 2px rgba(65, 105, 225, 0.7),
         0 0 16px 4px rgba(65, 105, 225, 0.5),
         0 0 24px 6px rgba(65, 105, 225, 0.3);
-    border-radius: 12px;
-    transition: box-shadow 0.3s ease, color 0.3s ease;
 }
 
 /* --------------------------------------------------------------
-   3. Layout für den Seiteninhalt
+   4. Hamburger‑Button (Material‑Icons)
+   -------------------------------------------------------------- */
+.nav-toggle {
+    display: none;
+    /* erst im Media‑Query sichtbar */
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 999px;
+    border: 1px solid rgba(148, 163, 184, 0.5);
+    cursor: pointer;
+    /* Icon is an inline SVG image inside the button */
+    transition: background .2s;
+    z-index: 1100;
+    /* über dem Mobile‑Panel */
+}
+
+/* Icon‑Farbe beim Hover */
+.nav-toggle:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+/* Icon image inside the button */
+.nav-toggle .nav-icon {
+    width: 22px;
+    height: 22px;
+    display: block;
+}
+
+/* When the button is focused (accessibility) */
+.nav-toggle:focus {
+    outline: 2px solid rgba(65, 105, 225, 0.35);
+    outline-offset: 2px;
+}
+
+/* --------------------------------------------------------------
+   5. Mobile‑Panel (versteckt, wird per JS eingeblendet)
+   -------------------------------------------------------------- */
+.mobile {
+    position: absolute;
+    /* über dem Content */
+    top: calc(var(--navbar-height) + 0.8rem);
+    /* direkt unter der Navbar */
+    right: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Zentriert die Items horizontal */
+    text-align: center;
+    background: rgba(15, 23, 42, 0.98);
+    border-radius: 0 0 12px 12px;
+    padding: 1rem 0;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+    width: 240px;
+    max-width: 90vw;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: opacity .2s ease, transform .2s ease, visibility .2s;
+}
+
+/* Sichtbar, wenn .open gesetzt wird */
+.mobile.open {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+/* --------------------------------------------------------------
+   6. Responsive – Break‑Point 1024 px
+   -------------------------------------------------------------- */
+@media (max-width: 1024px) {
+
+    /* Desktop‑Menu ausblenden, Mobile‑Menu & Hamburger‑Button zeigen */
+    .nav-links.desktop {
+        display: none;
+    }
+
+    .nav-toggle {
+        display: flex;
+    }
+
+    /* Mobile‑Panel muss flex bleiben, damit die Links untereinander stehen */
+    .nav-links.mobile {
+        display: flex;
+    }
+
+    /* Navbar‑Höhe für kleine Bildschirme */
+    :root {
+        --navbar-height: 100px;
+    }
+}
+
+/* --------------------------------------------------------------
+   7. Layout für den Seiteninhalt (unverändert)
    -------------------------------------------------------------- */
 .Fp {
     background: radial-gradient(circle at bottom, #1b2735 0%, #090a0f 100%);
     flex: 1;
-    /* kein extra padding‑top mehr – Abstand entsteht über #mode-choice */
 }
 
-/* -------------------  MODUS‑WAHL als Kasten  ------------------- */
-/* -------------------  MODUS‑WAHL (Game‑Mode) ------------------- */
-/* Der äußere Container sorgt dafür, dass die eigentliche Karte (.mode-box)
-    zentriert und vom Navbar‑Abstand getrennt wird. */
+/* Modus‑Auswahl (Game‑Mode) */
 #mode-choice {
     width: 100%;
     display: flex;
     justify-content: center;
-    /* horizontal zentrieren */
     margin-top: var(--navbar-height);
-    /* exakt unter der Navbar */
     margin-bottom: 2rem;
 }
 
-/* Die eigentliche Card – begrenzte Breite, Glas‑Look, runde Ecken */
 .mode-box {
     max-width: 600px;
-    /* maximale Breite */
     width: 100%;
-    /* bis 600 px 100 % */
     padding: 2rem 1.5rem;
     background: rgba(255, 255, 255, 0.08);
     backdrop-filter: blur(var(--blur-radius));
@@ -187,21 +251,19 @@ body {
     text-align: center;
 }
 
-/* Überschrift im Kasten */
 .mode-box h2 {
     font-size: 1.8rem;
     margin-bottom: 1rem;
     color: var(--accent-blue);
 }
 
-/* Buttons im Kasten (erben bereits .btn‑Stile) */
 .mode-box .btn {
     font-size: 1.1rem;
     padding: 0.7rem 1.4rem;
     margin: 0.4rem;
 }
 
-/* HOME‑Bereich (bleibt unverändert) */
+/* HOME‑Bereich, Social‑Icons, Buttons … (gekürzt) */
 .home {
     font-size: larger;
     width: fit-content;
@@ -212,11 +274,10 @@ body {
 
 .name {
     margin: 10px;
-    color: white;
+    color: #fff;
     font-size: 100px;
 }
 
-/* Social‑Icons */
 .sci {
     display: flex;
     gap: 20px;
@@ -229,32 +290,29 @@ body {
     color: #cc33ff;
 }
 
-/* Buttons (Ja / Nein) – Basis‑Stile (werden von .btn geerbt) */
 .btn {
     background: var(--accent-blue);
     color: #fff;
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    transition: transform 0.1s ease;
+    transition: transform .1s;
 }
 
 .btn:hover {
     transform: scale(1.05);
 }
 
-/* Versteckte Elemente */
 .hidden {
     display: none;
 }
 
-/* INFO‑SECTION */
 #info {
     text-align: center;
     margin-top: 2rem;
 }
 
-/* ABOUT‑Bereich */
+/* ABOUT, SKILLS, PORTFOLIO, FOOTER … (wie vorher) */
 .about {
     background: radial-gradient(circle at bottom, #1b2735 0%, #090a0f 100%);
 }
@@ -277,7 +335,6 @@ body {
     border-radius: 10px;
 }
 
-/* Profil‑Bild‑Platzhalter */
 .adminpic-placeholder {
     width: 100%;
     height: 50vh;
@@ -286,14 +343,12 @@ body {
     border-radius: 10px;
 }
 
-/* SKILLS‑Platzhalter */
 .myskill h1 {
     text-align: center;
     color: #1bcedc;
     margin: 30px 0;
 }
 
-/* PORTFOLIO‑Platzhalter */
 .pro2 {
     text-align: center;
     color: #fff;
@@ -312,7 +367,7 @@ body {
     color: #fff;
     text-decoration: none;
     font-size: 1.2rem;
-    transition: transform 0.2s, box-shadow 0.2s;
+    transition: transform .2s, box-shadow .2s;
 }
 
 .projects1:hover {
@@ -320,7 +375,6 @@ body {
     box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
 }
 
-/* FOOTER – leichtes Glass‑Design */
 .site {
     background: rgba(10, 10, 10, 0.6);
     backdrop-filter: blur(var(--blur-radius));
@@ -338,49 +392,67 @@ body {
 }
 
 /* --------------------------------------------------------------
-   4. Responsive – Mobile‑Menu
+   8. Mobile Anpassungen (max-width: 768px)
    -------------------------------------------------------------- */
 @media (max-width: 768px) {
-    .nav-toggle {
-        display: flex;
+    /* Schriftgrößen anpassen */
+    .name {
+        font-size: 12vw; /* Skaliert mit der Breite, statt fest 100px */
+        margin: 5px;
     }
 
-    .nav-links {
-        position: fixed;
-        inset: 0 0 0 30%;
-        padding: 80px 24px 24px;
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 1rem;
-        background: rgba(15, 23, 42, 0.98);
-        border-left: 1px solid rgba(148, 163, 184, 0.25);
-        transform: translateX(100%);
-        transition: transform 0.26s ease;
+    .home h2 {
+        font-size: 1.5rem;
     }
 
-    .main-nav.is-open .nav-links {
-        transform: translateX(0);
+    .home h3 {
+        font-size: 1.2rem !important; /* Überschreibt Inline-Styles falls nötig */
     }
 
-    /* Hamburger‑zu‑X‑Animation */
-    .main-nav.is-open .nav-toggle .bar:nth-child(1) {
-        transform: translateY(5px) rotate(45deg);
-    }
-
-    .main-nav.is-open .nav-toggle .bar:nth-child(2) {
-        opacity: 0;
-    }
-
-    .main-nav.is-open .nav-toggle .bar:nth-child(3) {
-        transform: translateY(-5px) rotate(-45deg);
-    }
-
-    .nav-links .nav-item {
+    /* Layout-Anpassungen */
+    .home {
+        padding: 10% 5%;
+        margin-left: 0;
         width: 100%;
+        text-align: center;
+        border-radius: 20px;
     }
 
-    /* Auf kleineren Bildschirmen ist die Navbar‑Höhe etwas geringer */
-    :root {
-        --navbar-height: 100px;
+    .sci {
+        margin-top: 2rem;
+    }
+
+    /* About-Section kompakter */
+    .abouth {
+        font-size: 1.5em;
+        margin: 20px 0 15px 0;
+    }
+
+    .aboutp {
+        padding: 15px;
+        font-size: 1rem;
+        margin: 10px;
+    }
+
+    /* Mode-Box */
+    .mode-box {
+        padding: 1.5rem 1rem;
+    }
+
+    .mode-box h2 {
+        font-size: 1.4rem;
+    }
+
+    /* Projekte untereinander und volle Breite */
+    .projects1 {
+        width: 90%;
+        height: auto;
+        min-height: 200px;
+        line-height: normal;
+        padding: 2rem 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 10px auto; /* Zentriert */
     }
 }

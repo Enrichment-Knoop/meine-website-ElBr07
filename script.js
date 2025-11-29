@@ -1,8 +1,15 @@
-/* script.js – einfache Interaktivität
-   Alle Kommentare sind auf Deutsch.
-*/
+/*==================================================================
+   script.js – Gesamte Interaktivität
+   1️⃣ Game‑Mode (Ja / Nein) – LocalStorage
+   2️⃣ Mobile‑Menu (Hamburger‑Button) – öffnen / schließen
+   3️⃣ Mobile‑Menu schließen, wenn ein Link angeklickt wird
+   4️⃣ Aktiven Nav‑Link markieren (Desktop + Mobile)
+===================================================================*/
 
 document.addEventListener("DOMContentLoaded", () => {
+  /*----------------------------------------------------------------
+    1️⃣ Game‑Mode (Ja / Nein) – LocalStorage
+  ----------------------------------------------------------------*/
   const yesBtn = document.getElementById("yes-btn");
   const noBtn = document.getElementById("no-btn");
   const modeChoice = document.getElementById("mode-choice");
@@ -10,22 +17,19 @@ document.addEventListener("DOMContentLoaded", () => {
   const shopLink = document.getElementById("shop-link");
   const pointsSpan = document.getElementById("points");
 
-  // ---- Hilfsfunktionen -------------------------------------------------
   const setMode = (playful) => {
     localStorage.setItem("playfulMode", playful ? "true" : "false");
-    // Punkte‑Anzeige initialisieren (falls noch nicht vorhanden)
     if (!localStorage.getItem("points")) localStorage.setItem("points", "0");
     updateUI();
   };
 
   const getMode = () => localStorage.getItem("playfulMode") === "true";
-
   const getPoints = () => parseInt(localStorage.getItem("points") || "0", 10);
 
   const updateUI = () => {
     const playful = getMode();
 
-    // Navigations‑Link „Shop“ nur im spielerischen Modus zeigen
+    // Shop‑Link nur im spielerischen Modus sichtbar
     if (shopLink) shopLink.style.display = playful ? "inline-block" : "none";
 
     // Punkte‑Anzeige aktualisieren
@@ -36,56 +40,54 @@ document.addEventListener("DOMContentLoaded", () => {
     if (infoSection) infoSection.classList.remove("hidden");
   };
 
-  // ---- Event‑Handler ----------------------------------------------------
   if (yesBtn) yesBtn.addEventListener("click", () => setMode(true));
   if (noBtn) noBtn.addEventListener("click", () => setMode(false));
 
-  // ---- Beim Laden prüfen, ob bereits ein Modus gewählt wurde ----------
-  if (localStorage.getItem("playfulMode") !== null) {
-    // Modus ist bereits gespeichert → UI sofort anpassen
-    updateUI();
-  }
-});
+  // Beim Laden prüfen, ob bereits ein Modus gewählt wurde
+  if (localStorage.getItem("playfulMode") !== null) updateUI();
 
-/* --------------------------------------------------------------
-   Mobile‑Menu‑Toggle (falls du das Hamburger‑Icon nutzt)
-   -------------------------------------------------------------- */
-const navToggle = document.getElementById("navToggle");
-const mainNav = document.querySelector(".main-nav");
+  /*----------------------------------------------------------------
+    2️⃣ Mobile‑Menu (Hamburger‑Button) – öffnen / schließen
+  ----------------------------------------------------------------*/
+  const navToggle = document.querySelector(".nav-toggle"); // Button
+  const mobileMenu = document.querySelector(".nav-links.mobile"); // Panel
 
-if (navToggle && mainNav) {
-  navToggle.addEventListener("click", () => {
-    const isOpen = mainNav.classList.toggle("is-open");
-    navToggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
-  });
-
-  // Schließe das Menü, wenn ein Link geklickt wird
-  document.querySelectorAll(".nav-links a").forEach((link) => {
-    link.addEventListener("click", () => {
-      if (mainNav.classList.contains("is-open")) {
-        mainNav.classList.remove("is-open");
-        navToggle.setAttribute("aria-expanded", "false");
+  if (navToggle && mobileMenu) {
+    // Klick auf den Hamburger‑Button
+    navToggle.addEventListener("click", () => {
+      const isOpen = mobileMenu.classList.toggle("open"); // Panel sichtbar?
+      navToggle.classList.toggle("open", isOpen); // Icon‑Wechsel (menu ↔ arrow_drop_down)
+      // Wenn ein <img class="nav-icon"> vorhanden ist, wechsle dessen src
+      const iconImg = navToggle.querySelector(".nav-icon");
+      if (iconImg) {
+        const menuSrc =
+          iconImg.getAttribute("data-menu-src") || iconImg.getAttribute("src");
+        const closeSrc = iconImg.getAttribute("data-close-src") || menuSrc;
+        iconImg.setAttribute("src", isOpen ? closeSrc : menuSrc);
       }
+      navToggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
     });
-  });
-}
 
-/* --------------------------------------------------------------
-   2️⃣  Aktiven Nav‑Link ermitteln und .active hinzufügen
-   -------------------------------------------------------------- */
-document.addEventListener("DOMContentLoaded", function () {
-  // Aktuelle URL (nur der Pfad, ohne Domain, Query‑String oder Hash)
+    // Schließe das Mobile‑Panel, wenn ein Link darin geklickt wird
+    const mobileLinks = mobileMenu.querySelectorAll(".nav-link");
+    mobileLinks.forEach((link) => {
+      link.addEventListener("click", () => {
+        mobileMenu.classList.remove("open");
+        navToggle.classList.remove("open");
+        navToggle.setAttribute("aria-expanded", "false");
+      });
+    });
+  }
+
+  /*----------------------------------------------------------------
+    3️⃣ Aktiven Nav‑Link markieren (Desktop + Mobile)
+  ----------------------------------------------------------------*/
   const currentPath = window.location.pathname;
+  const allNavLinks = document.querySelectorAll(".nav-link");
 
-  // Alle Links in der Navbar
-  const navLinks = document.querySelectorAll(".nav-link");
-
-  navLinks.forEach((link) => {
-    // Der Link‑href kann relativ (z. B. "/pages/skills/") sein.
-    // Wir vergleichen nur den Pfadanteil.
+  allNavLinks.forEach((link) => {
     const linkPath = new URL(link.href, window.location.origin).pathname;
 
-    // Wenn Pfade übereinstimmen → aktiv markieren
     if (
       linkPath === currentPath ||
       (linkPath.endsWith("/") && currentPath.startsWith(linkPath))

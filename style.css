@@ -174,20 +174,21 @@ body {
     /* über dem Content */
     top: calc(var(--navbar-height) + 0.8rem);
     /* direkt unter der Navbar */
-    right: 1rem;
+    left: 50%;
+    transform: translateX(-50%) translateY(-10px);
     display: flex;
     flex-direction: column;
     align-items: center; /* Zentriert die Items horizontal */
     text-align: center;
     background: rgba(15, 23, 42, 0.98);
-    border-radius: 0 0 12px 12px;
-    padding: 1rem 0;
+    backdrop-filter: blur(var(--blur-radius));
+    border-radius: 15px;
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+    padding: 1rem 0;
     width: 240px;
     max-width: 90vw;
     opacity: 0;
     visibility: hidden;
-    transform: translateY(-10px);
     transition: opacity .2s ease, transform .2s ease, visibility .2s;
 }
 
@@ -195,7 +196,7 @@ body {
 .nav-links.mobile.open {
     opacity: 1;
     visibility: visible;
-    transform: translateY(0);
+    transform: translateX(-50%) translateY(0);
 }
 
 /* --------------------------------------------------------------

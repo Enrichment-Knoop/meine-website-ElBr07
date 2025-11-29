@@ -66,6 +66,35 @@ body {
     border-radius: 50%;
     background: rgba(255, 255, 255, 0.15);
     border: 2px solid var(--accent-blue);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Logo Icon Styling */
+.logo-icon {
+    width: 32px;
+    height: 32px;
+    filter: brightness(0) saturate(100%) invert(71%) sepia(18%) saturate(1234%) hue-rotate(178deg) brightness(99%) contrast(97%);
+    /* Färbt das Icon in einem hellen Blau */
+}
+
+/* --------------------------------------------------------------
+   3. Gemeinsame Styles für beide Nav‑Listen
+   -------------------------------------------------------------- */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+}
+
+/* Logo‑Platzhalter */
+.logo-placeholder {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.15);
+    border: 2px solid var(--accent-blue);
 }
 
 /* --------------------------------------------------------------

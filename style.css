@@ -376,7 +376,10 @@ body {
     box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
 }
 
-.site {
+/* --------------------------------------------------------------
+   8. Footer / Fußzeile
+   -------------------------------------------------------------- */
+.site-footer {
     background: rgba(10, 10, 10, 0.6);
     backdrop-filter: blur(var(--blur-radius));
     color: var(--text-color);
@@ -392,8 +395,47 @@ body {
     margin-top: 0.4rem;
 }
 
+/* Footer Links Styling - gleicher Look wie Nav-Links */
+.site-footer a {
+    position: relative;
+    display: inline-block;
+    padding: 0.4rem 0.8rem;
+    font-weight: 600;
+    color: var(--accent-blue);
+    text-decoration: none;
+    border-radius: 12px;
+    transition:
+        transform .12s ease,
+        box-shadow .12s ease,
+        background .2s ease,
+        color .18s ease;
+}
+
+.site-footer a:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 16px 35px rgba(59, 130, 246, 0.55);
+    background: radial-gradient(circle at top left, #6366f1, #2563eb);
+    color: #fff;
+}
+
+.site-footer a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -4px;
+    width: 0;
+    height: 2px;
+    border-radius: 999px;
+    background: linear-gradient(90deg, #22d3ee, #6366f1);
+    transition: width .22s ease;
+}
+
+.site-footer a:hover::after {
+    width: 100%;
+}
+
 /* --------------------------------------------------------------
-   8. Mobile Anpassungen (max-width: 768px)
+   9. Mobile Anpassungen (max-width: 768px)
    -------------------------------------------------------------- */
 @media (max-width: 768px) {
     /* Schriftgrößen anpassen */

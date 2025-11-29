@@ -169,7 +169,7 @@ body {
 /* --------------------------------------------------------------
    5. Mobile‑Panel (versteckt, wird per JS eingeblendet)
    -------------------------------------------------------------- */
-.mobile {
+.nav-links.mobile {
     position: absolute;
     /* über dem Content */
     top: calc(var(--navbar-height) + 0.8rem);
@@ -192,7 +192,7 @@ body {
 }
 
 /* Sichtbar, wenn .open gesetzt wird */
-.mobile.open {
+.nav-links.mobile.open {
     opacity: 1;
     visibility: visible;
     transform: translateY(0);

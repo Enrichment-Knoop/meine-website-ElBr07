@@ -82,11 +82,7 @@ body {
 /* --------------------------------------------------------------
    3. Gemeinsame Styles für beide Nav‑Listen
    -------------------------------------------------------------- */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 1.5rem;
-}
+
 
 /* Logo‑Platzhalter */
 .logo-placeholder {

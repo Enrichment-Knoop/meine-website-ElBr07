@@ -20,7 +20,7 @@
 
             <!-- Logo (optional) -->
             <div class="logo-placeholder" aria-label="Logo">
-                <img src="../assets/icons/account_box_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg" alt="Account Icon" class="logo-icon">
+                <img src="../assets/icons/account_box.svg" alt="Account Icon" class="logo-icon">
             </div>
 
             <!-- ----------- DESKTOP‑MENÜ (sichtbar ab 1024 px) ----------- -->
@@ -34,9 +34,8 @@
 
             <!-- ----------- HAMBURGER‑ICON (nur < 1024 px) ----------- -->
             <button class="nav-toggle" aria-expanded="false" aria-label="Navigation öffnen">
-                <img class="nav-icon" src="../assets/icons/menu_24dp_A7C7FA_FILL0_wght400_GRAD0_opsz24.svg" alt="Menu"
-                    data-menu-src="../assets/icons/menu_24dp_A7C7FA_FILL0_wght400_GRAD0_opsz24.svg"
-                    data-close-src="../assets/icons/arrow_drop_down_24dp_A7C7FA_FILL0_wght400_GRAD0_opsz24.svg">
+                <img class="nav-icon" src="../assets/icons/menu.svg" alt="Menu" data-menu-src="../assets/icons/menu.svg"
+                    data-close-src="../assets/icons/arrow_drop_down.svg">
             </button>
 
             <!-- ----------- MOBILE‑MENÜ (versteckt, wird per JS eingeblendet) ----------- -->
@@ -53,21 +52,35 @@
 
     <div class="Fp">
         <section id="contact">
-            <h2>Contact</h2>
+            <h2>Kontakt</h2>
 
-            <!-- Beispiel‑Kontakt‑Formular -->
-            <form action="#" method="post" class="contact-form">
-                <label for="name">Name</label>
-                <input type="text" id="name" name="name" required>
+            <div class="contact-grid">
+                <!-- Linke Spalte: ausführliche Kontaktdaten (wird aus JSON befüllt) -->
+                <div id="contact-details" class="contact-details">
+                    <!-- Strukturbeispiel (wird dynamisch ersetzt):
+                    <div class="contact-row"><span class="icon-placeholder" data-field="email"></span><strong>E‑Mail:</strong> <a href="mailto:...">...</a></div>
+                    -->
+                    <p>Lade Kontakte ...</p>
+                </div>
 
-                <label for="email">E‑Mail</label>
-                <input type="email" id="email" name="email" required>
+                <!-- Rechte Spalte: QR‑Code + vCard Download -->
+                <aside class="contact-qr-block">
+                    <div id="qr-container" class="qr-container">
+                        <img id="contact-qr" alt="QR Code mit Kontaktdaten" src="" />
+                    </div>
+                    <div class="qr-actions">
+                        <a id="download-vcard" class="btn" href="#" download="kontakt.vcf">vCard herunterladen</a>
+                        <button id="copy-email" class="btn hidden" type="button">E‑Mail kopieren</button>
+                    </div>
+                    <p class="qr-help">Scanne den QR‑Code, um meine Kontaktdaten schnell zu übernehmen.</p>
+                </aside>
+            </div>
 
-                <label for="msg">Nachricht</label>
-                <textarea id="msg" name="msg" rows="4" required></textarea>
-
-                <button type="submit" class="btn">Absenden</button>
-            </form>
+            <!-- Hinweis für Icon‑Platzhalter: Du kannst später Icons anliefern. -->
+            <p class="icon-note">Hinweis: Icons werden später vor jedem Feld angezeigt. Verwende das Attribut
+                <code>data-field="feldname"</code> (z.B. <code>email</code>, <code>phone</code>, <code>linkedin</code>),
+                damit die Icons automatisch vor den entsprechenden Zeilen platziert werden.
+            </p>
         </section>
     </div>
 
@@ -80,6 +93,7 @@
         </p>
     </footer>
 
+    <script src="../assets/js/contact-render.js"></script>
     <script src="../script.js"></script>
 </body>
 

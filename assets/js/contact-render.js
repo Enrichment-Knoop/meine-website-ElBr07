@@ -213,7 +213,7 @@
     const qrImg = document.getElementById("contact-qr");
     const encoded = encodeURIComponent(vcard);
     // Use Google Charts API to render QR. (Internet erforderlich). Falls offline: lokale QR Bibliothek einsetzen.
-    const qrUrl = `https://chart.googleapis.com/chart?chs=300x300&cht=qr&chl=${encoded}&choe=UTF-8`;
+    const qrUrl = ''//`https://chart.googleapis.com/chart?chs=300x300&cht=qr&chl=${encoded}&choe=UTF-8`;
     qrImg.src = qrUrl;
 
     // vCard Download

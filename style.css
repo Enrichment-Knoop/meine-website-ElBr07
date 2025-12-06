@@ -1,4 +1,25 @@
 /* --------------------------------------------------------------
+   0. Custom Fonts
+   -------------------------------------------------------------- */
+@font-face {
+    font-family: "GoogleSansCode";
+    src: url("../assets/font/GoogleSansCode/GoogleSansCode-VariableFont_wght.ttf") format("truetype-variations");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* Deaktiviert: Lavishly Yours Font
+@font-face {
+    font-family: "LavishlyYours";
+    src: url("../assets/font/Lavishly_Yours/LavishlyYours-Regular.ttf") format("truetype");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+*/
+
+/* --------------------------------------------------------------
    1. Grundvariablen & Reset
    -------------------------------------------------------------- */
 :root {
@@ -13,6 +34,8 @@
     /* für Glass‑Effekte */
     --navbar-height: 120px;
     /* Höhe inkl. Abstand */
+    --font-primary: "GoogleSansCode", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    /* eigene Schriftart mit Fallbacks */
 }
 
 /* Reset */
@@ -25,19 +48,23 @@
 }
 
 /* HTML – Radial gradient für den gesamten Viewport (hinter Navbar sichtbar) */
+
+
 html {
-    background: radial-gradient(circle at bottom, #1b2735 0%, #090a0f 100%);
+    min-height: 100%;
     height: 100%;
 }
 
-/* Grundlayout */
 body {
-    padding-top: var(--navbar-height);
-    font-family: "Times New Roman", Times, serif;
-    /* Transparent so html gradient shows through */
-    background: transparent;
-    color: var(--text-color);
     min-height: 100vh;
+    min-height: 100svh;
+    font-family: var(--font-primary);
+    background: radial-gradient(circle at bottom, #1b2735 0%, #090a0f 100%);
+    background-attachment: fixed;
+    background-size: cover;
+    background-repeat: no-repeat;
+    color: var(--text-color);
+    padding-top: var(--navbar-height);
     display: flex;
     flex-direction: column;
 }
@@ -263,9 +290,8 @@ body {
    7. Layout für den Seiteninhalt (unverändert)
    -------------------------------------------------------------- */
 .Fp {
-    /* Gradient now on html, so no background needed here */
-    background: transparent;
     flex: 1;
+    /* Kein eigener Hintergrund, damit body-Gradient durchscheint */
 }
 
 /* Modus‑Auswahl (Game‑Mode) */
@@ -542,8 +568,13 @@ body {
 }
 
 /* --------------------------------------------------------------
-   Kontakt‑Seite: Grid, Icons, QR‑Block
+/* Kontakt-Seite: Grid, Icons, QR‑Block
    -------------------------------------------------------------- */
+#contact h2 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
 .contact-grid {
     display: grid;
     grid-template-columns: 1fr 320px;

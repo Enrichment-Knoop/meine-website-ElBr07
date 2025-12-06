@@ -67,6 +67,7 @@ body {
     padding-top: var(--navbar-height);
     display: flex;
     flex-direction: column;
+    overflow-x: hidden;
 }
 
 /* --------------------------------------------------------------
@@ -366,6 +367,35 @@ body {
     transform: scale(1.05);
 }
 
+/* ---- Styling für Contact-Buttons (vCard Download & Email) ---- */
+.qr-actions .btn {
+    background: var(--accent-blue);
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    padding: 0.6rem 1.2rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition:
+        transform .12s ease,
+        box-shadow .12s ease,
+        background .2s ease,
+        color .18s ease;
+    position: relative;
+}
+
+.qr-actions .btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 16px 35px rgba(59, 130, 246, 0.55);
+    background: radial-gradient(circle at top left, #6366f1, #2563eb);
+    color: #fff;
+}
+
+.qr-actions .btn:active {
+    transform: translateY(0px);
+}
+
 .hidden {
     display: none;
 }
@@ -443,12 +473,14 @@ body {
    8. Footer / Fußzeile
    -------------------------------------------------------------- */
 .site-footer {
+    width: 100%;
     background: rgba(10, 10, 10, 0.6);
     backdrop-filter: blur(var(--blur-radius));
     color: var(--text-color);
     text-align: center;
-    padding: 1rem 0;
+    padding: 1rem;
     font-size: 0.9rem;
+    box-sizing: border-box;
 }
 
 .site-footer p:last-of-type {
@@ -630,9 +662,33 @@ body {
 
 .qr-actions {
     display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
     gap: 0.6rem;
     margin-top: 0.6rem;
     justify-content: center;
+}
+
+/* Mobile: Stack buttons vertically, make much smaller to prevent scroll */
+@media (max-width: 768px) {
+    .qr-actions {
+        flex-direction: column;
+        gap: 0.3rem;
+        width: 100%;
+        padding: 0 0.5rem;
+        box-sizing: border-box;
+    }
+
+    .qr-actions .btn {
+        width: 100%;
+        max-width: 100%;
+        padding: 0.5rem 0.8rem;
+        font-size: 0.85rem;
+        text-align: center;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
 }
 
 .qr-help {

@@ -130,10 +130,25 @@
       details.appendChild(createRow("mobile", "Mobil", a));
     }
 
-    // Email
+    // Email - Link copies to clipboard
     if (data.email) {
-      const a = makeLink("mailto:" + data.email, data.email);
-      details.appendChild(createRow("email", "E‑Mail", a));
+      // Create a span that looks like a link or just a clickable element
+      const span = el("span", "copy-link"); // You might need to add CSS for .copy-link to look like a link if desired, or reuse 'a' tag with preventDefault
+      span.textContent = data.email;
+      span.style.cursor = "pointer";
+      span.style.textDecoration = "underline";
+      span.title = "Klicken zum Kopieren";
+      
+      span.addEventListener("click", () => {
+        navigator.clipboard.writeText(data.email).then(() => {
+           // Visual feedback could be improved, but simple alert or text change for now
+           const originalText = span.textContent;
+           span.textContent = "Kopiert!";
+           setTimeout(() => span.textContent = originalText, 1500);
+        });
+      });
+      
+      details.appendChild(createRow("email", "E‑Mail", span));
     }
 
     // Website & Links
@@ -213,16 +228,12 @@
       );
     downloadLink.href = vcardUrl;
 
-    // Copy email button: toggle via CSS class
-    const copyBtn = document.getElementById("copy-email");
-    if (data.email) {
-      copyBtn.classList.remove("hidden");
-      copyBtn.addEventListener("click", () => {
-        navigator.clipboard.writeText(data.email).then(() => {
-          const prev = copyBtn.textContent;
-          copyBtn.textContent = "E‑Mail kopiert";
-          setTimeout(() => (copyBtn.textContent = prev), 1500);
-        });
+    // Send email button: toggle via CSS class
+    const sendBtn = document.getElementById("send-email");
+    if (data.email && sendBtn) {
+      sendBtn.classList.remove("hidden");
+      sendBtn.addEventListener("click", () => {
+        window.location.href = "mailto:" + data.email;
       });
     }
 

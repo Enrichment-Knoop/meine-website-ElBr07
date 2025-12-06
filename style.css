@@ -53,14 +53,23 @@
 html {
     min-height: 100%;
     height: 100%;
+    /* Prevent horizontal scrollbars from zoomed/touch content */
+    overflow-x: hidden;
+    /* strong fallback background color in case the gradient isn't painted
+         (some mobile browsers show white patches when gradients with fixed
+         backgrounds interact with pinch/zoom). */
+    background-color: #090a0f;
+    /* dark fallback */
 }
 
 body {
+    /* prefer the standard viewport unit; svh causes issues on some mobile browsers */
     min-height: 100vh;
-    min-height: 100svh;
     font-family: var(--font-primary);
     background: radial-gradient(circle at bottom, #1b2735 0%, #090a0f 100%);
-    background-attachment: fixed;
+    /* don't use fixed backgrounds on mobile/zoom-prone viewports; use scroll
+         so the gradient stays visually continuous and won't leave white gaps */
+    background-attachment: scroll;
     background-size: cover;
     background-repeat: no-repeat;
     color: var(--text-color);
@@ -68,6 +77,9 @@ body {
     display: flex;
     flex-direction: column;
     overflow-x: hidden;
+    /* ensure vertical scrolling is allowed and smooth on touch devices */
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
 }
 
 /* --------------------------------------------------------------
@@ -82,6 +94,7 @@ body {
     padding: 0.8rem 2rem;
     /* Translucent glass look (reverted) */
     background: rgba(255, 255, 255, 0.07);
+    -webkit-backdrop-filter: blur(var(--blur-radius));
     backdrop-filter: blur(var(--blur-radius));
     border-radius: 15px;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
@@ -244,6 +257,7 @@ body {
     /* Zentriert die Items horizontal */
     text-align: center;
     background: rgba(15, 23, 42, 0.98);
+    -webkit-backdrop-filter: blur(var(--blur-radius));
     backdrop-filter: blur(var(--blur-radius));
     border-radius: 15px;
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
@@ -292,6 +306,8 @@ body {
    -------------------------------------------------------------- */
 .Fp {
     flex: 1;
+    /* allow the content inside this flex child to grow and scroll instead of being clipped */
+    min-height: 0;
     /* Kein eigener Hintergrund, damit body-Gradient durchscheint */
 }
 
@@ -309,6 +325,7 @@ body {
     width: 100%;
     padding: 2rem 1.5rem;
     background: rgba(255, 255, 255, 0.08);
+    -webkit-backdrop-filter: blur(var(--blur-radius));
     backdrop-filter: blur(var(--blur-radius));
     border-radius: 12px;
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
@@ -437,6 +454,14 @@ body {
     border-radius: 10px;
 }
 
+/* Mobile: admin pic placeholder should auto-size */
+@media (max-width: 768px) {
+    .adminpic-placeholder {
+        height: auto;
+        min-height: 200px;
+    }
+}
+
 .myskill h1 {
     text-align: center;
     color: #1bcedc;
@@ -469,12 +494,35 @@ body {
     box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
 }
 
+/* Mobile: projects should reflow without hard height constraints */
+@media (max-width: 768px) {
+    .projects1 {
+        width: 90%;
+        height: auto;
+        min-height: 150px;
+        line-height: normal;
+        padding: 1.5rem 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 10px auto;
+    }
+}
+
 /* --------------------------------------------------------------
    8. Footer / Fußzeile
    -------------------------------------------------------------- */
 .site-footer {
     width: 100%;
-    background: rgba(10, 10, 10, 0.6);
+    position: relative;
+    left: 0;
+    right: 0;
+    background: rgba(10, 10, 10, 0.85);
+    /* stronger solid fallback color to avoid visible white areas under zoom */
+    background-color: #090a0f;
+    /* help prevent visual background gaps when the page is zoomed on mobile */
+    background-image: radial-gradient(circle at bottom, rgba(27, 39, 53, 0.55), rgba(9, 10, 15, 0.85));
+    -webkit-backdrop-filter: blur(var(--blur-radius));
     backdrop-filter: blur(var(--blur-radius));
     color: var(--text-color);
     text-align: center;
@@ -615,12 +663,27 @@ body {
     max-width: 1000px;
     margin: 2rem auto;
     padding: 1.2rem;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Mobile: single column, ensure no overflow */
+@media (max-width: 900px) {
+    .contact-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+        padding: 0.8rem;
+        margin: 1rem auto;
+    }
 }
 
 .contact-details {
     background: rgba(255, 255, 255, 0.03);
     padding: 1rem;
     border-radius: 10px;
+    box-sizing: border-box;
+    overflow-x: hidden;
+    word-break: break-word;
 }
 
 .contact-row {
@@ -629,6 +692,9 @@ body {
     gap: 0.6rem;
     padding: 0.45rem 0;
     border-bottom: 1px dashed rgba(255, 255, 255, 0.03);
+    box-sizing: border-box;
+    flex-wrap: wrap;
+    overflow-x: hidden;
 }
 
 .contact-name {
@@ -667,6 +733,8 @@ body {
     gap: 0.6rem;
     margin-top: 0.6rem;
     justify-content: center;
+    box-sizing: border-box;
+    width: 100%;
 }
 
 /* Mobile: Stack buttons vertically, make much smaller to prevent scroll */
@@ -685,9 +753,12 @@ body {
         padding: 0.5rem 0.8rem;
         font-size: 0.85rem;
         text-align: center;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
+        /* allow short wrapping if buttons are too narrow, avoid hard truncation */
+        white-space: normal;
+        overflow: visible;
+        text-overflow: unset;
+        /* make sure the button does not create a forced min-width on very narrow viewports */
+        min-width: 0;
     }
 }
 
@@ -705,5 +776,25 @@ body {
 @media (max-width: 900px) {
     .contact-grid {
         grid-template-columns: 1fr;
+    }
+}
+
+/* Extra small devices: reduce button font a bit and allow wrap to avoid overflow/clip */
+@media (max-width: 420px) {
+    .qr-actions .btn {
+        font-size: 0.78rem;
+        padding: 0.45rem 0.65rem;
+        white-space: normal;
+    }
+}
+
+/* Avoid fixed background on touch devices — fixed backgrounds cause visual gaps
+   while pinch/zooming on many mobile browsers (especially iOS). Use scroll on
+   coarse-pointer / small viewports so the gradient remains continuous. */
+@media (pointer: coarse),
+(max-width: 900px) {
+    body {
+        background-attachment: scroll;
+        background-position: center bottom;
     }
 }
